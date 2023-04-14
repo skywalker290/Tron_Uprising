@@ -1,0 +1,91 @@
+{% load static%}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="theme-color" content="#000000" />
+        <link rel="stylesheet" href="{% static 'registration.css' %}  " />
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="/script.js" defer></script>
+        <link rel="icon" href="%PUBLIC_URL%/images/favicon.ico" />
+        <!--google fonts-->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Roboto:wght@300&display=swap" rel="stylesheet">
+        <title>CraftConduit</title>
+    </head>
+    <body>
+      <noscript>You need to enable JavaScript to run this app.</noscript>
+      <div id="root"></div>
+       <div class="container">
+    <h2 class="reg-title">REGISTRATION</h2>
+
+    <form class="reg-form" method="POST" action="register">
+      {% csrf_token %}
+      <div>
+        <label for="name">NAME </label>
+        <input
+               id="name"
+               type="text"
+               placeholder="USERNAME"
+               name="name"
+               required
+               />
+      </div>
+      <div>
+        <label for="phone">PHONE NUMBER </label>
+        <input
+               id="phone"
+               type="tel"
+               placeholder="PHONE NUMBER"
+               name="phone"
+               required
+               />
+      </div>
+      <div>
+        <label for="city">CITY</label>
+        <input
+               id="city"
+               type="city"
+               placeholder="CITY"
+               name="city"
+               required
+               />
+      </div>
+      <div>
+        <label for="pincode">PINCODE</label>
+        <input
+               id="pincode"
+               type="pincode"
+               placeholder="PINCODE"
+               name="pincode"
+               required
+               />
+      </div>
+      <div>
+        <label for="password">SET PASSWORD </label>
+        <input
+               id="password"
+               type="password"
+               placeholder="PASSWORD"
+               name="password"
+               required
+               />
+      </div>
+        <label class="form-control">
+          <input type="radio" name="radio" />
+          Artisan
+        </label>
+        <label class="form-control">
+          <input type="radio" name="radio" checked />
+          Customer
+        </label>
+      <button class="regbtn regbtn--form" type="submit">
+        REGISTER
+      </button>
+    </form>
+</div>
+<a href="login">Click to Log In</a>
+    </body>
+</html>
