@@ -9,3 +9,7 @@ class user(models.Model):
     pincode=models.CharField(max_length=122)
     password=models.CharField(max_length=122)
     type=models.CharField(max_length=122)
+
+    def __str__(self):
+        return (self.phone+','+self.password)
+    
