@@ -20,7 +20,7 @@
 }
 
 body {
-    background: linear-gradient(to bottom right, var(--maroon), var(--carrot), var(--cream));
+    background: var(--cream);
     background-repeat: no-repeat;
     background-size: cover;
     width: 100%;
@@ -265,14 +265,14 @@ input[type="submit"]:hover {
     height: 500px;
     margin-top: 64px; 
     object-fit: cover;
-    opacity: 0.8;
+    opacity: 0.5;
 }
 
 .head_img
 {
     font-family: 'Bree Serif', serif;
-    font-size: 80px;
-    color: var(--cream);
+    font-size: 50px;
+    color: black;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -280,15 +280,41 @@ input[type="submit"]:hover {
 
 }
 
-@media only screen and (max-width: 600px) {
-  .formcontainer {
-  width: 300px;
-  margin: auto;
-  padding: 36px 48px 48px 48px;
-  background-color: var(--cream);
-  border-radius: 11px;
-  box-shadow: 0 2.4rem 4.8rem var(--brown);
-}}
+#map{
+    border-radius: 1.5rem;
+    box-shadow: 0px 0px 20px 6px var(--carrot);
+    height:400px;
+    width: 100%;
+
+}
+.precisebut
+{
+    display:flex;
+    justify-content:center;
+    margin-top: 14px;
+}
+
+.precisebutton
+{
+    align-self: center;
+    background-color: var(--carrot);
+    justify-content: center;
+    color: var(--cream);
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    margin: 50px;
+    padding-left: 120px;
+    padding-right: 120px;
+}
+
+.precisebutton:hover {
+    background-color: var(--maroon);
+}
 
 /* CONTACT US */
 .contacth1
