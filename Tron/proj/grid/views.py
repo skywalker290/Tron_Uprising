@@ -1,8 +1,10 @@
 from django.shortcuts import render,HttpResponse,redirect
 from django.shortcuts import *
-from grid.models import user
+from grid.models import *
 from django.contrib.auth.models import User
 from django.contrib.auth import *
+from .forms import ProductForm
+
 
 
 #home is the home posting function which respond according to the usertype if anonymous means no login 
@@ -122,4 +124,29 @@ def nearby(request):
     return render(request,"maps.html",cont)
 
 
+def pregister(request):
+    if(request.method=="POST"):
+        pname=request.POST.get('product-name')
+        pimage=request.POST.get('product-image')
+        prange=request.POST.get('price-range')
+        prod=product(pname=pname,sphone=request.user,
+                    price=prange,image=pimage)
+        prod.save()
+        
+    # userdata=user.objects.filter(phone=request.user)
+    # userdata=userdata.first()
+    # cont={
+    #     'userdata':userdata
+    # }
+    return render(request,"prodreg.html")
 
+
+# def pregister(request):
+#     if request.method == 'POST':
+#         form = ProductForm(request.POST, request.FILES)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('products:list')
+#     else:
+#         form = ProductForm()
+#     return render(request, 'products/add_productq.html', {'form': form})

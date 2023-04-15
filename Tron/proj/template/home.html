@@ -28,14 +28,16 @@
                 </div>
                 <ul class="menu-items">
                     <li><a href="">HOME</a></li>
-                    <li><a href="#">ORDERS</a></li>
+                    
                     <li><a href="#">ABOUT US</a></li>
                     <li><a href="#">CONTACT US</a></li>
                     
                     {% if not loggedin %}
                     <li><a href="login">LOGIN</a></li>
                     {% else %}
+                    <li><a href="#">ORDERS</a></li>
                       {% if userdata.type == "A" %}
+                        <li><a href="productreg">Prod. Reg</a></li>
                         <li><a href="nearby">Nearby Events</a></li>
                       {% endif %}
                       
@@ -43,7 +45,6 @@
                       
                       <li><a href="logout">LOGOUT</a></li>
                     {% endif %}
-                    
                 </ul>
                 <h1 class="logo">CraftConduit</h1>
             </div>

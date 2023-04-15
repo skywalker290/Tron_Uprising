@@ -35,3 +35,28 @@ function initMap(lat,lng) {
       });
     }
   }
+
+  function geocodeAddress(address, callback) {
+    // Initialize the Geocoder object
+    var geocoder = new google.maps.Geocoder();
+    
+    // Call the geocode method to convert the address to latitude and longitude
+    geocoder.geocode({ address: address }, function(results, status) {
+      // If the geocode was successful
+      if (status === google.maps.GeocoderStatus.OK) {
+        // Extract the latitude and longitude from the first result
+        var lat = results[0].geometry.location.lat();
+        var lng = results[0].geometry.location.lng();
+        
+        // Create an object with the latitude and longitude
+        var coords = { lat: lat, lng: lng };
+        
+        // Call the callback function with the coordinates
+        callback(coords);
+      } else {
+        // If the geocode was not successful, log an error message
+        console.error('Geocode was not successful for the following reason: ' + status);
+      }
+    });
+  }
+  

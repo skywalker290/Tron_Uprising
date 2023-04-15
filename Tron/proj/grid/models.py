@@ -13,3 +13,11 @@ class user(models.Model):
     def __str__(self):
         return (self.phone+','+self.password)
     
+class product(models.Model):
+    pname=models.CharField(max_length=122)
+    sphone=models.CharField(max_length=122)
+    price=models.CharField(max_length=122)
+    image=models.ImageField(upload_to='product/')
+
+    def __str__(self):
+        return (self.sphone)
