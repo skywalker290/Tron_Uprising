@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#000000" />
+  <link rel="stylesheet" href="workshopreg.css" />
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="home.js" defer></script>
+  <link rel="icon" href="%PUBLIC_URL%/images/favicon.ico" />
+  <!--google fonts-->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Roboto:wght@300&display=swap" rel="stylesheet">
+  <title>CraftConduit</title>
+</head>
+
+<body>
+  <div id="root"></div>
+  <nav class="navbar">
+    <div class="navbar-container container">
+      <input type="checkbox" name="" id="">
+      <div class="hamburger-lines">
+        <span class="line line1"></span>
+        <span class="line line2"></span>
+        <span class="line line3"></span>
+      </div>
+      <ul class="menu-items">
+        <li><a href="#">HOME</a></li>
+        <li><a href="#">ABOUT US</a></li>
+        <li><a href="#">CONTACT US</a></li>
+        <li><a href="#">LOGIN</a></li>
+      </ul>
+      <h1 class="logo">CraftConduit</h1>
+    </div>
+  </nav>
+  <div class="home_con">
+    <img class="home_im1" src="home1.jpg" alt="Artisan Photo">
+    <h1 class="head_img">For the artisans. <br> By the artisans.</h1>
+  </div>
+  <form class='formcontainer'>
+    <h1 class="workregh1">ORGANISE YOUR WORKSHOP!</h1>
+    <label for="workshop_name">WORKSHOP NAME</label>
+    <input type="text" id="workshop_name" name="workshop_name" required>
+
+    <label for="workshop-image">IMAGE (if any)</label>
+    <input type="file" id="workshop-image" name="workshop-image">
+
+    <label for="artwork">WHAT WILL YOU TEACH?</label>
+    <input type="text" id="artwork" name="artwork">
+
+    <label for="price-range">PRICE</label>
+    <input type="number" id="price-range" name="price-range" min="0" step="10" required>
+
+    <label for="datetime">DATE AND TIME OF WORKSHOP</label>
+    <input type="datetime-local" id="datetime" name="datetime" required>
+    <br>
+<div class="submit"><input type="submit" value="REGISTER"></div>
+  </form>
+</body>
+
+</html>
