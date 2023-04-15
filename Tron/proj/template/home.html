@@ -1,27 +1,104 @@
+{% load static  %}
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
 <html>
     <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="theme-color" content="#000000" />
+        <link rel="stylesheet" href="{% static 'home.css' %}" />
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="{% static 'home.js' %}" defer></script>
+        <link rel="icon" href="%PUBLIC_URL%/images/favicon.ico" />
+        <!--google fonts-->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Roboto:wght@300&display=swap" rel="stylesheet">
+        <title>CraftConduit</title>
     </head>
     <body>
-        <!--[if lt IE 7]>
-            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
+      <div id="root"></div>
+      <body>
+        <nav class="navbar">
+            <div class="navbar-container container">
+                <input type="checkbox" name="" id="">
+                <div class="hamburger-lines">
+                    <span class="line line1"></span>
+                    <span class="line line2"></span>
+                    <span class="line line3"></span>
+                </div>
+                <ul class="menu-items">
+                    <li><a href="">HOME</a></li>
+                    <li><a href="#">ORDERS</a></li>
+                    <li><a href="#">ABOUT US</a></li>
+                    <li><a href="#">CONTACT US</a></li>
+                    
+                    {% if not loggedin %}
+                    <li><a href="login">LOGIN</a></li>
+                    {% else %}
+                      {% if userdata.type == "A" %}
+                        <li><a href="nearby">Nearby Events</a></li>
+                      {% endif %}
+                      
+                      <li>{{request.user.first_name}}</li>
+                      
+                      <li><a href="logout">LOGOUT</a></li>
+                    {% endif %}
+                    
+                </ul>
+                <h1 class="logo">CraftConduit</h1>
+            </div>
+        </nav>
+        <div class="home_con">
+            <img class="home_im1" src="{% static 'home1.jpg' %}" alt="Artisan Photo">
+            <h1 class="head_img">For the artisans. <br> By the artisans.</h1>
+        </div>
+        <!--slideshow-->
+        <div class="slidebg">
+        <div class="fade">
+        <div class="slideshow-container">
+            <h1 class="slidesh1"> Our Popular Artworks</h1>
+            <!-- Full-width images with number and caption text -->
+            <div class="mySlides fade">
+              <img class="imgslide" src="{% static 'kalarambh.webp' %}">
+              <div class="text">Kalarambh</div>
+            </div>
+          
+            <div class="mySlides fade">
+              <img class="imgslide" src="{% static 'rogan.jpeg' %}">
+              <div class="text">Rogan Art</div>
+            </div>
+          
+            <div class="mySlides fade">
+              <img class="imgslide" src="{% static 'carpet.jpg' %}">
+              <div class="text">Rajasthani Carpet Making</div>
+            </div>
 
-        This is home 
-        {{request.user.first_name}}
-        <a href="logout"><button >logout</button></a>
-        
-        
-        <script src="" async defer></script>
+            <div class="mySlides fade">
+                <img class="imgslide" src="{% static 'WORLI.jpg' %}">
+                <div class="text">Worli Art</div>
+              </div>
+
+              <div class="mySlides fade">
+                <img class="imgslide" src="{% static 'terracotta.jpg'%}">
+                <div class="text">Terracotta Art</div>
+              </div>
+
+          
+            <!-- Next and previous buttons -->
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+          </div>
+          <br>
+          </div>
+        </div>
+          <div style="text-align:center">
+            <span class="dot" onclick="currentSlide(1)"></span> 
+            <span class="dot" onclick="currentSlide(2)"></span> 
+            <span class="dot" onclick="currentSlide(3)"></span> 
+            <span class="dot" onclick="currentSlide(4)"></span>
+            <span class="dot" onclick="currentSlide(5)"></span>
+          </div>  
+          </div> 
+  </body>
     </body>
 </html>

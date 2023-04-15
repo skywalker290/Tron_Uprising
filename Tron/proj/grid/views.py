@@ -1,29 +1,52 @@
 from django.shortcuts import render,HttpResponse,redirect
 from django.shortcuts import *
-from grid.models import *
+from grid.models import user
 from django.contrib.auth.models import User
 from django.contrib.auth import *
 
 
-from grid.models import user
-# Create your views here.
-
+#home is the home posting function which respond according to the usertype if anonymous means no login 
+#then send the userdata for displaying and further puroses
 def home(request):
+    #if user is anonymous we use a flag value for the website to know its anaonymous
     if(request.user.is_anonymous):
-        return redirect("login")
+        cont={
+            'loggedin':False
+        }
+        return render(request,'home.html',cont)
+    #     return redirect("login")
+    else:
+        # print(request.user);
+        userdata=user.objects.filter(phone=request.user)
+        userdata=userdata.first()
+        print(userdata,"home")
+        cont={
+            'loggedin':True,
+            'userdata':userdata
+        }
+        return render(request,'home.html',cont)
 
-    return render(request,'home.html')
+    
     #return  HttpResponse("ths is homje");
 
+
+
+
+#This function is for userlogin which basically gets values and auth.. 
+#if matched then boom and save the userdata into a global varibale userdata
 def loginuser(request):
     if(request.method=="POST"):
         phone=request.POST.get('phone');
         password=request.POST.get('password');
         
-        user=authenticate(username=phone,password=password);
+        uuser=authenticate(username=phone,password=password);
 
-        if(user is not None):
-            login(request,user)
+        if(uuser is not None):
+            userdata=user.objects.filter(phone=phone)
+            userdata=userdata.first()
+            print(userdata)
+            
+            login(request,uuser)
             return redirect("/")
         else:
             return redirect("login")
@@ -32,6 +55,12 @@ def loginuser(request):
     return render(request,'login.html')
     #return  HttpResponse("ths is homje");
 
+
+
+
+
+#this is a register function in which regiter page post its request and we save it into the model named user 
+#and create a user at the same time
 def register(request):
     if(request.method=="POST"):
         name=request.POST.get('name')
@@ -40,6 +69,8 @@ def register(request):
         password=request.POST.get('password')
         type=request.POST.get('radio')
         pincode=request.POST.get('pincode')
+        
+        print(type);
 
         cont=user(name=name,phone=phone,city=city,password=password,type=type,pincode=pincode)
         new_user=User.objects.create_user(username=phone,password=password)
@@ -55,6 +86,9 @@ def register(request):
 
 
 
+
+
+
 # def AUTH(phone,passwd):
 #     query=user.objects.filter(phone=phone,password=passwd);
 #     my_data=query.first();
@@ -64,7 +98,28 @@ def register(request):
 #     else:
 #         return False;
 
+
+
+
+
+
+
+#this is a simple logout function used to logout any existing logined user
 def logoutuser(request):
     logout(request)
     return redirect("login")
+
+
+
+#nearby function uses api in the javascript for which we send data of the user to 
+#be forwarded to the api
+def nearby(request):
+    userdata=user.objects.filter(phone=request.user)
+    userdata=userdata.first()
+    cont={
+        'userdata':userdata
+    }
+    return render(request,"maps.html",cont)
+
+
 
