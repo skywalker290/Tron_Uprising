@@ -17,7 +17,6 @@
     </head>
     <body>
       <div id="root"></div>
-      <body>
         <nav class="navbar">
             <div class="navbar-container container">
                 <input type="checkbox" name="" id="">
@@ -30,7 +29,7 @@
                     <li><a href="">HOME</a></li>
                     
                     <li><a href="#">ABOUT US</a></li>
-                    <li><a href="#">CONTACT US</a></li>
+                    <li><a href="#contact">CONTACT US</a></li>
                     
                     {% if not loggedin %}
                     <li><a href="login">LOGIN</a></li>
@@ -115,8 +114,8 @@
               <div class="mySlides fade">
                 <img class="imgslide" src="{% static 'terracotta.jpg'%}">
                 <div class="text">Terracotta Art</div>
-              </div>
-
+            </div>
+            <div id="contact"></div>
           
             <!-- Next and previous buttons -->
             <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
@@ -132,7 +131,55 @@
             <span class="dot" onclick="currentSlide(4)"></span>
             <span class="dot" onclick="currentSlide(5)"></span>
           </div>  
-          </div> 
-  </body>
+          </div>
+    <!-- CONTACT US -->
+          <section class="contact-sec sec-pad">
+            <div class="container">
+              <div class="contactrow">
+                <div class="col-md-6">
+                  <div class="contact-detail">
+                    <h1 class="contacth1">Contact us</h1>
+          
+                    <ul class="contact-ul">
+                      <li>For Artisans. By Artisans.</li>
+                                  <li> Empowering local artisans on India and bringing you the best artwork at the most affordable price.</li>
+                                  <li>The price they deserve. The price you deserve.</li>
+                    </ul>
+                    </div>
+                    </div>
+    
+                <div class="form1">
+                  <form action="#" class="contFrm" method="POST">
+                    <div class="row">
+                      <div class="col">
+                        <input type="text" name="name" placeholder="Your Name" class="inptFld" required />
+                      </div>
+          
+                      <div class="col-sm-6">
+                        <input type="email" name="email" placeholder="Email Address" class="inptFld" required />
+                      </div>
+          
+                      <div class="col-sm-6">
+                        <input type="tel" name="phone" placeholder="Phone Number" class="inptFld" required />
+                      </div>
+          
+                      <div class="col-sm-6">
+                        <input type="text" name="sub" placeholder="Subject" class="inptFld" required />
+                      </div>
+          
+                      <div class="col-12">
+                        <textarea class="inptFld" rows="" cols="" placeholder="Your Message..." required></textarea>
+                      </div>
+          
+                      <div class="col-12">
+                        <input type="submit" name="submit" value="SUBMIT" class="inptBtn" />
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+          
+            </div>
+          </section>
     </body>
 </html>
