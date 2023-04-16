@@ -263,6 +263,6 @@ def orders(request):
             'userdata':userdata,
             'orders':ord
         }
-    return render(request,"orders.html")
+    return render(request,"orders.html",cont)
 
         

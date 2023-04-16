@@ -257,17 +257,17 @@ body {
     transition: all 0.3s;
 }
 
-/* .featuredPropBox ul li:nth-child(1) {
+.featuredPropBox ul li:nth-child(2) {
     background-image: url('rogan.jpeg');
 }
 
-.featuredPropBox ul li:nth-child(2) {
+.featuredPropBox ul li:nth-child(1) {
     background-image: url('WORLI.jpg');
 }
 
 .featuredPropBox ul li:nth-child(3) {
     background-image: url('kalarambh.webp');
-} */
+}
 
 .featuredPropBox ul li .fphead {
     font-family: 'Bree Serif', serif;

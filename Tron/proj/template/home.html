@@ -33,7 +33,7 @@
                     {% if not loggedin %}
                     <li><a href="login">LOGIN</a></li>
                     {% else %}
-                    <li><a href="#">ORDERS</a></li>
+                    <li><a href="orders">ORDERS</a></li>
                       {% if userdata.type == "A" %}
                         <li><a href="productreg">PRODUCT</a></li>
                         <li><a href="nearby">EVENTS</a></li>
@@ -60,10 +60,10 @@
         <div class="workcontainer">
           <div class="row">
            <div class="col-lg-12">
-            {% for ws in wsdata %}
+            
               <div class="featuredPropBox">
                <ul>
-                
+                {% for ws in wsdata %}
                   <li><form method="POST" id='{{ws.wname}}' action="wsbook"> <a href="#" onclick="document.getElementById('{{ws.wname}}').submit(); return false;">
                     {% csrf_token %}
                     <div class="fphead">{{ws.wname}}</div>
@@ -73,29 +73,15 @@
                    <input type="hidden" name="workshop_name" value="{{ ws.wname }}">
                    <input type="hidden" name="workshop_id" value="{{ ws.wid }}">
                     </a></form> </li>
-                  
+                    {% endfor %}
                     
-                  {% comment %} <li> <a href="#">
-                    <div class="fphead">Learn Worli</div>
-                    <div class="fptext">
-                     <p>Join us on April 29 for a fun session on Rogan Art in Surat!</p>
-                   </div>
-                    </a> </li>
-                  <li> <a href="#">
-                    <div class="fphead">Getting started with Kalarambh</div>
-                    <div class="fptext">
-                     <p>Join us on April 29 for a fun session on Rogan Art in Surat!</p>
-                   </div>
-                    </a> </li> {% endcomment %}
+
+                    
                 </ul>
                 
              </div>
-             <style>
-              .featuredPropBox ul li{
-              background-image: url({{ws.image}});
-              }
             </style>
-             {% endfor %}
+             
             </div>
          </div>
         </div>
