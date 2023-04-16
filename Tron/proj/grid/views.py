@@ -255,9 +255,14 @@ def shop(request):
     
 
 def orders(request):
-    ord=order.objects.filter(buyerid=request.user)
     userdata=user.objects.filter(phone=request.user)
     userdata=userdata.first()
+
+    if(userdata.type=='C'):
+        ord=order.objects.filter(buyerid=request.user)
+    elif(userdata.type=='A'):
+        ord=order.objects.filter(sellerid=request.user)
+    
     cont={
             'loggedin':True,
             'userdata':userdata,
