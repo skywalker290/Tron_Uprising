@@ -5,6 +5,24 @@ from django.contrib.auth.models import User
 from django.contrib.auth import *
 import datetime
 # from .forms import ProductForm
+from twilio.rest import Client
+
+
+
+def send_sms(phone_number, message):
+    TWILIO_ACCOUNT_SID = 'AC531f1718e64935ea8bdb30750606f345'
+    TWILIO_AUTH_TOKEN = '19b3a29abf2942cc3a9b1581f086a7fc'
+    TWILIO_PHONE_NUMBER = '+15752146590'
+    client = Client(TWILIO_ACCOUNT_SID,TWILIO_AUTH_TOKEN)
+    message = client.messages.create(
+        to=phone_number,
+        from_=TWILIO_PHONE_NUMBER,
+        body=message
+    )
+    return message.sid
+
+print(send_sms('+919810030504','inshalla bois played well'))
+
 
 
 
@@ -129,6 +147,7 @@ def nearby(request):
     userdata=user.objects.filter(phone=request.user)
     userdata=userdata.first()
     cont={
+        'loggedin':True,
         'userdata':userdata
     }
     return render(request,"maps.html",cont)
@@ -203,6 +222,12 @@ def shop(request):
                       product_name=product_name,order_date=order_date,quantity=quantity
                       ,product_id=pid)
             req.save()
+            message="ORDER RECIEVED:PRODUCT_NAME:%s QUANTITY:%s"%(product_name,quantity)
+            phone=product.objects.filter(pid=pid)
+            phone=phone.first()
+            phone=phone.sphone;
+            print(phone)
+            print(send_sms(phone,message))
 
             return redirect("shop")
     else:

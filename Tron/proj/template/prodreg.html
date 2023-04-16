@@ -31,7 +31,6 @@
       <ul class="menu-items">
         <li><a href="\">HOME</a></li>
         
-        <li><a href="#">ABOUT US</a></li>
         <li><a href="#contact">CONTACT US</a></li>
         
         {% if not loggedin %}
@@ -39,8 +38,8 @@
         {% else %}
         <li><a href="#">ORDERS</a></li>
           {% if userdata.type == "A" %}
-            <li><a href="productreg">Prod. Reg</a></li>
-            <li><a href="nearby">Nearby Events</a></li>
+            <li><a href="productreg">PRODUCT</a></li>
+            <li><a href="nearby">EVENTS</a></li>
           {% endif %}
           
           <li>{{request.user.first_name}}</li>
