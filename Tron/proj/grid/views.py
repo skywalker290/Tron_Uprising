@@ -11,20 +11,30 @@ from django.contrib.auth import *
 #then send the userdata for displaying and further puroses
 def home(request):
     #if user is anonymous we use a flag value for the website to know its anaonymous
+    wsdata=workshop.objects.filter()
+    print(request.POST.get('workshop_name'))
     if(request.user.is_anonymous):
         cont={
-            'loggedin':False
+            'loggedin':False,
+            'wsdata':wsdata
         }
         return render(request,'home.html',cont)
     #     return redirect("login")
+    elif(request.POST.get('workshop_name')):
+        wname=request.POST.get('workshop_name')
+        wid=request.POST.get('workshop_id')
+        book=workshopbook(wname=wname,wid=wid,pid=request.user)
+        book.save()
     else:
         # print(request.user);
         userdata=user.objects.filter(phone=request.user)
         userdata=userdata.first()
+        
         print(userdata,"home")
         cont={
             'loggedin':True,
-            'userdata':userdata
+            'userdata':userdata,
+            'wsdata':wsdata
         }
         return render(request,'home.html',cont)
 
@@ -124,33 +134,50 @@ def nearby(request):
     return render(request,"maps.html",cont)
 
 
-def pregister1(request):
-    if(request.method=="POST"):
-        pname=request.POST.get('product-name')
-        pimage=request.POST.get('product-image')
-        prange=request.POST.get('price-range')
-        prod=product(pname=pname,sphone=request.user,price=prange,image=pimage)
+def pregister(request):
+    if request.method == "POST"  :
+        pname = request.POST.get('product-name')
+        prange = request.POST.get('price-range')
+        pimage = request.FILES['product-image']  # use request.FILES to access uploaded files
+        prod = product(pname=pname, sphone=request.user, price=prange, image=pimage)
         prod.save()
 
-    userdata=user.objects.filter(phone=request.user)
-    userdata=userdata.first()
+    userdata = user.objects.filter(phone=request.user)
+    userdata = userdata.first()
     cont={
-        'userdata':userdata
-    }
-    return render(request,"prodreg.html",cont)
+            'loggedin':True,
+            'userdata':userdata
+        }
+    return render(request, "prodreg.html", cont)
 
-def pregister(request):
-        if request.method == "POST"  :
-            pname = request.POST.get('product-name')
-            prange = request.POST.get('price-range')
-            pimage = request.FILES['product-image']  # use request.FILES to access uploaded files
-            prod = product(pname=pname, sphone=request.user, price=prange, image=pimage)
-            prod.save()
+def wsregister(request):
+    if (request.method == "POST"):
+        wname=request.POST.get('workshop-name')
+        wimage=request.FILES['workshop-image']
+        wabout=request.POST.get('workshop-about')
+        wrange=request.POST.get('workshop-range')
+        wcity=request.POST.get('workshop-city')
+        wdatetime=request.POST.get('workshop-datetime')
 
-        userdata = user.objects.filter(phone=request.user)
-        userdata = userdata.first()
-        cont={
-                'loggedin':True,
-                'userdata':userdata
-            }
-        return render(request, "prodreg.html", cont)
+        ws=workshop(wname=wname,wimage=wimage,wabout=wabout,wrange=wrange,wcity=wcity,wdatetime=wdatetime,wid=request.user)
+        ws.save()
+    
+    userdata = user.objects.filter(phone=request.user)
+    userdata = userdata.first()
+    cont={
+            'loggedin':True,
+            'userdata':userdata
+        }
+    return render(request, "workshopreg.html", cont)
+
+
+
+
+def wsbook(request):
+    if(request.method=="POST" and (not request.user.is_anonymous)):
+        wname=request.POST.get('workshop_name')
+        wid=request.POST.get('workshop_id')
+        book=workshopbook(wname=wname,wid=wid,pid=request.user)
+        book.save()
+    return redirect("home")
+        

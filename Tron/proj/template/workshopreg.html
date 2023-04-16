@@ -1,0 +1,83 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#000000" />
+  <link rel="stylesheet" href="{% static 'workshopreg.css' %}" />
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="{% static 'home.js' %}" defer></script>
+  <link rel="icon" href="%PUBLIC_URL%/images/favicon.ico" />
+  <!--google fonts-->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Roboto:wght@300&display=swap" rel="stylesheet">
+  <title>CraftConduit</title>
+</head>
+
+<body>
+  <div id="root"></div>
+  <nav class="navbar">
+    <div class="navbar-container container">
+        <input type="checkbox" name="" id="">
+        <div class="hamburger-lines">
+            <span class="line line1"></span>
+            <span class="line line2"></span>
+            <span class="line line3"></span>
+        </div>
+        <ul class="menu-items">
+            <li><a href="">HOME</a></li>
+            {% if userdata.type == "C" %}
+            <li><a href="#">ABOUT US</a></li>
+            {% endif %}
+            <li><a href="#contact">CONTACT US</a></li>
+            
+            {% if not loggedin %}
+            <li><a href="login">LOGIN</a></li>
+            {% else %}
+            <li><a href="#">ORDERS</a></li>
+              {% if userdata.type == "A" %}
+                <li><a href="productreg">PRODUCTS</a></li>
+                <li><a href="nearby">EVENTS</a></li>
+              {% endif %}
+              
+              <li>{{request.user.first_name}}</li>
+              
+              <li><a href="logout">LOGOUT</a></li>
+            {% endif %}
+        </ul>
+        <h1 class="logo">CraftConduit</h1>
+    </div>
+</nav>
+  <div class="home_con">
+    <img class="home_im1" src="{% static 'home1.jpg' %}" alt="Artisan Photo">
+    <h1 class="head_img">For the artisans. <br> By the artisans.</h1>
+  </div>
+  <form class='formcontainer' method="POST" action="workshopreg" enctype="multipart/form-data">
+    {% csrf_token %}
+    <h1 class="workregh1">ORGANISE YOUR WORKSHOP!</h1>
+    <label for="workshop-name">WORKSHOP NAME</label>
+    <input type="text" id="workshop-name" name="workshop-name" required>
+
+    <label for="workshop-image">IMAGE</label>
+    <input type="file" id="workshop-image" name="workshop-image" required>
+
+    <label for="workshop-about">WHAT WILL YOU TEACH?</label>
+    <input type="text" id="workshop-about" name="workshop-about">
+
+    <label for="price-range">PRICE</label>
+    <input type="number" id="price-range" name="workshop-range" min="0" step="10" required>
+
+    <label for="city">CITY</label>
+    <input type="text" id="city" name="workshop-city" required>
+
+    <label for="datetime">DATE AND TIME OF WORKSHOP</label>
+    <input type="datetime-local" id="datetime" name="workshop-datetime" required>
+    <br>
+<div class="submit"><input type="submit" value="REGISTER"></div>
+  </form>
+</body>
+
+</html>

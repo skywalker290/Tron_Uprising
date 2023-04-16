@@ -36,8 +36,8 @@
                     {% else %}
                     <li><a href="#">ORDERS</a></li>
                       {% if userdata.type == "A" %}
-                        <li><a href="productreg">Prod. Reg</a></li>
-                        <li><a href="nearby">Nearby Events</a></li>
+                        <li><a href="productreg">PRODUCT</a></li>
+                        <li><a href="nearby">EVENTS</a></li>
                       {% endif %}
                       
                       <li>{{request.user.first_name}}</li>
@@ -54,18 +54,26 @@
         </div>
          <!-- workshops -->
         <h1 class="slidesh1"> UPCOMING WORKSHOPS</h1>
+        <h2 class="slidesh1"> Click To Book</h2>
         <div class="workcontainer">
           <div class="row">
            <div class="col-lg-12">
               <div class="featuredPropBox">
                <ul>
-                  <li> <a href="#">
-                    <div class="fphead">Rogan Art Workshop</div>
+                {% for ws in wsdata %}
+
+                  <li><form method="POST" id='{{ws.wname}}' action="wsbook"> <a href="#" onclick="document.getElementById('{{ws.wname}}').submit(); return false;">
+                    {% csrf_token %}
+                    <div class="fphead">{{ws.wname}}</div>
                     <div class="fptext">
-                     <p>Join us on April 29 for a fun session on Rogan Art in Surat!</p>
+                     <p>Join us on {{ws.wdatetime}} <br>{{ws.wabout}} in {{ws.wcity}}!</p>
                    </div>
-                    </a> </li>
-                  <li> <a href="#">
+                   <input type="hidden" name="workshop_name" value="{{ ws.wname }}">
+                   <input type="hidden" name="workshop_id" value="{{ ws.wid }}">
+                    </a></form> </li>
+                  
+                    {% endfor %}
+                  {% comment %} <li> <a href="#">
                     <div class="fphead">Learn Worli</div>
                     <div class="fptext">
                      <p>Join us on April 29 for a fun session on Rogan Art in Surat!</p>
@@ -76,15 +84,20 @@
                     <div class="fptext">
                      <p>Join us on April 29 for a fun session on Rogan Art in Surat!</p>
                    </div>
-                    </a> </li>
+                    </a> </li> {% endcomment %}
                 </ul>
              </div>
             </div>
          </div>
         </div>
+        {% if userdata.type == "A" %}
+        <a href="workshopreg">
         <div class="buttoncontainer">
-        <button class="workshopbutton">Want to organise a workshop?</button>
-      </div>
+          <button class="workshopbutton">Want to organise a workshop?</button>
+        </div>
+      </a>
+        {% endif %}
+        
         <!--slideshow-->
         <div class="slidebg">
         <div class="fade">

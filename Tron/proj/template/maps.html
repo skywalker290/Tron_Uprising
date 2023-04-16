@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 
@@ -5,10 +6,10 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#000000" />
-  <link rel="stylesheet" href="maps.css" />
+  <link rel="stylesheet" href="{% static 'maps1.css' %}" />
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-  <script src="maps.js" defer></script>
-  <link rel="icon" href="%PUBLIC_URL%/images/favicon.ico" />
+  <script src="{% static 'maps.js' %}" defer></script>
+  {% comment %} <link rel="icon" href="%PUBLIC_URL%/images/favicon.ico" /> {% endcomment %}
   <!--google fonts-->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -59,7 +60,7 @@
     </div>
 </nav>
   <div class="home_con">
-    <img class="home_im1" src="home1.jpg" alt="Artisan Photo">
+    <img class="home_im1" src="{% static 'home1.jpg' %}" alt="Artisan Photo">
     <h1 class="head_img">Click on the <br>'Precise Location'<br> to get nearby places for you artwork.</h1>
   </div>
      <!-- <h1 class="maph1">Click on Precise Location Button to get nearby places to showcase your handiwork</h1> -->
@@ -67,11 +68,11 @@
     <br>
     
     <div id="map"></div>
-  <script src="maps.js"></script>
+  <script src="{% static 'maps.js' %}"></script>
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5YvQKvocbu2RTAupkG4s9tfeu7mjT0l0&libraries=places&callback=initMap">
 </script>
-    <script src="maps.js"></script>
+    <script src="{% static 'maps.js' %}"></script>
   <div id="contact"></div>
               <!-- CONTACT US -->
               <section class="contact-sec sec-pad">

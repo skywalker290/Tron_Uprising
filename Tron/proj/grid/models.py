@@ -21,3 +21,23 @@ class product(models.Model):
 
     def __str__(self):
         return (self.sphone)
+    
+class workshop(models.Model):
+    wname = models.CharField(max_length=122)
+    wid = models.CharField(max_length=122)
+    wimage = models.ImageField(upload_to='workshop/')
+    wabout = models.CharField(max_length=122)
+    wrange=models.CharField(max_length=122, default='',null=True, blank=True)
+    wcity = models.CharField(max_length=122)
+    wdatetime = models.CharField(max_length=122)
+
+    def __str__(self):
+        return self.wname
+
+class workshopbook(models.Model):
+    wname = models.CharField(max_length=122)
+    wid = models.CharField(max_length=122)
+    pid= models.CharField(max_length=122)
+
+    def __str__(self):
+        return self.pid
