@@ -3,6 +3,7 @@ from django.shortcuts import *
 from grid.models import *
 from django.contrib.auth.models import User
 from django.contrib.auth import *
+import datetime
 # from .forms import ProductForm
 
 
@@ -30,7 +31,6 @@ def home(request):
         userdata=user.objects.filter(phone=request.user)
         userdata=userdata.first()
         
-        print(userdata,"home")
         cont={
             'loggedin':True,
             'userdata':userdata,
@@ -139,7 +139,8 @@ def pregister(request):
         pname = request.POST.get('product-name')
         prange = request.POST.get('price-range')
         pimage = request.FILES['product-image']  # use request.FILES to access uploaded files
-        prod = product(pname=pname, sphone=request.user, price=prange, image=pimage)
+        pid=    gen_id()
+        prod = product(pname=pname, sphone=request.user, price=prange, image=pimage,pid=pid)
         prod.save()
 
     userdata = user.objects.filter(phone=request.user)
@@ -180,4 +181,41 @@ def wsbook(request):
         book=workshopbook(wname=wname,wid=wid,pid=request.user)
         book.save()
     return redirect("home")
+
+
+def gen_id():
+    now = datetime.datetime.now()
+    return now.strftime('%Y%m%d%H%M%S')
+
+def shop(request):
+    if(request.method=="POST"):
+        if(request.user.is_anonymous):
+            return redirect("login")
+        else:
+            orderid=gen_id()
+            buyerid=request.user
+            sellerid=request.POST.get('seller_id')
+            product_name=request.POST.get('product_name')
+            quantity=request.POST.get('quantity')
+            pid=request.POST.get('product_id')
+            order_date=datetime.date.today()
+            req=order(orderid=orderid,buyerid=buyerid,sellerid=sellerid,
+                      product_name=product_name,order_date=order_date,quantity=quantity
+                      ,product_id=pid)
+            req.save()
+
+            return redirect("shop")
+    else:
+        userdata=user.objects.filter(phone=request.user)
+        userdata=userdata.first()
+
+        products=product.objects.filter()
+        
+        cont={
+            'loggedin':True,
+            'userdata':userdata,
+            'products':products
+        }
+        return render(request,"ecom.html",cont)
+
         

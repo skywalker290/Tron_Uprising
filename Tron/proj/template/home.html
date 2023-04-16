@@ -38,6 +38,9 @@
                       {% if userdata.type == "A" %}
                         <li><a href="productreg">PRODUCT</a></li>
                         <li><a href="nearby">EVENTS</a></li>
+
+                        {% else %}
+                        <li><a href="shop">SHOP</a></li>
                       {% endif %}
                       
                       <li>{{request.user.first_name}}</li>
@@ -61,7 +64,6 @@
               <div class="featuredPropBox">
                <ul>
                 {% for ws in wsdata %}
-
                   <li><form method="POST" id='{{ws.wname}}' action="wsbook"> <a href="#" onclick="document.getElementById('{{ws.wname}}').submit(); return false;">
                     {% csrf_token %}
                     <div class="fphead">{{ws.wname}}</div>

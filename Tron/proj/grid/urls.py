@@ -11,6 +11,7 @@ urlpatterns = [
     path('nearby',views.nearby,name='nearby'),
     path('productreg',views.pregister,name='productreg'),
     path('workshopreg',views.wsregister,name='workshopreg'),
-    path('wsbook',views.wsbook,name='workshopbook')   
+    path('wsbook',views.wsbook,name='workshopbook'),
+    path('shop',views.shop,name='shop')  
     
 ]

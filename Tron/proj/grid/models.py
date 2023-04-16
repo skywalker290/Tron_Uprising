@@ -14,13 +14,14 @@ class user(models.Model):
         return (self.phone+','+self.password)
     
 class product(models.Model):
+    pid=models.CharField(max_length=122)
     pname=models.CharField(max_length=122)
     sphone=models.CharField(max_length=122)
     price=models.CharField(max_length=122)
     image=models.ImageField(upload_to='product/')
 
     def __str__(self):
-        return (self.sphone)
+        return (self.pid+","+self.pname)
     
 class workshop(models.Model):
     wname = models.CharField(max_length=122)
@@ -41,3 +42,15 @@ class workshopbook(models.Model):
 
     def __str__(self):
         return self.pid
+    
+class order(models.Model):
+    orderid=models.CharField(max_length=122)
+    buyerid=models.CharField(max_length=122)
+    sellerid=models.CharField(max_length=122)
+    product_name=models.CharField(max_length=122)
+    product_id=models.CharField(max_length=122)
+    quantity=models.IntegerField()
+    order_date=models.DateField(max_length=122)
+
+    def __str__(self):
+        return self.orderid+","+self.product_id
