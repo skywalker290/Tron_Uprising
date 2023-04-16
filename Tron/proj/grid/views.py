@@ -11,7 +11,7 @@ from twilio.rest import Client
 
 def send_sms(phone_number, message):
     TWILIO_ACCOUNT_SID = 'AC531f1718e64935ea8bdb30750606f345'
-    TWILIO_AUTH_TOKEN = '19b3a29abf2942cc3a9b1581f086a7fc'
+    TWILIO_AUTH_TOKEN = '4b75109c2ebb40cb0d49485181f65b76'
     TWILIO_PHONE_NUMBER = '+15752146590'
     client = Client(TWILIO_ACCOUNT_SID,TWILIO_AUTH_TOKEN)
     message = client.messages.create(
@@ -21,7 +21,16 @@ def send_sms(phone_number, message):
     )
     return message.sid
 
-print(send_sms('+919810030504','inshalla bois played well'))
+# def send_sms(to,message):
+#     account_sid = "AC531f1718e64935ea8bdb30750606f345"
+#     client = Client(account_sid, auth_token)
+#     message = client.messages.create(
+#     body="Hello from Twilio",
+#     from_="+15752146590",
+#     to="+919810030504"
+#     )
+#     print(message.sid)
+# print(send_sms('+919810030504','inshalla bois played well'))
 
 
 
@@ -226,8 +235,9 @@ def shop(request):
             phone=product.objects.filter(pid=pid)
             phone=phone.first()
             phone=phone.sphone;
+            phone="+91"+phone;
             print(phone)
-            print(send_sms(phone,message))
+            # print(send_sms("+919548031969",message))
 
             return redirect("shop")
     else:
@@ -242,5 +252,17 @@ def shop(request):
             'products':products
         }
         return render(request,"ecom.html",cont)
+    
+
+def orders(request):
+    ord=order.objects.filter(buyerid=request.user)
+    userdata=user.objects.filter(phone=request.user)
+    userdata=userdata.first()
+    cont={
+            'loggedin':True,
+            'userdata':userdata,
+            'orders':ord
+        }
+    return render(request,"orders.html")
 
         

@@ -12,6 +12,7 @@ urlpatterns = [
     path('productreg',views.pregister,name='productreg'),
     path('workshopreg',views.wsregister,name='workshopreg'),
     path('wsbook',views.wsbook,name='workshopbook'),
-    path('shop',views.shop,name='shop')  
+    path('shop',views.shop,name='shop'),
+    path('orders',views.orders,name='orders')  
     
 ]
